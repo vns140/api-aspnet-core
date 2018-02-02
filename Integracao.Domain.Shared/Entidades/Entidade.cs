@@ -5,9 +5,11 @@ namespace Contmatic.Integracao.Domain.Entidades.Shared
 {
     public abstract class Entidade
     {
-        public  Entidade(){}
+        public Entidade()
+        {
+            Id = Guid.NewGuid();
+        }
 
-    
-        public Guid Id { get; set; }
+        public Guid Id { get; }
     }
 }

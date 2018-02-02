@@ -4,11 +4,30 @@ namespace Contmatic.Integracao.Domain.Entidades.Shared
 {
     public abstract class Cliente
     {
+
+        #region constructors
         protected Cliente() { }
-        public string CNPJ { get; set; }
-        public string RazaoSocial { get; set; }
-        public string Codigo { get; set; }
-        public string Apelido { get; set; }
-        public Email Email { get; set; }
+        protected Cliente(string cNPJ, string razaoSocial, string codigo, string apelido, Email email)
+        {
+            CNPJ = cNPJ;
+            RazaoSocial = razaoSocial;
+            Codigo = codigo;
+            Apelido = apelido;
+            Email = email;
+        }
+
+        #endregion
+
+        #region properties
+        
+        public string CNPJ { get; }
+        public string RazaoSocial { get; }
+        public string Codigo { get; }
+        public string Apelido { get; }
+        public Email Email { get; }
+
+        #endregion
+
+
     }
 }

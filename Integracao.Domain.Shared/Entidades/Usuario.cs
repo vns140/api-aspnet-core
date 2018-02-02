@@ -6,6 +6,7 @@ namespace Contmatic.Integracao.Domain.Entidades.Shared
         {
             
         }
+        
         public string Nome { get; set; }
         public string Email { get; set; }
     }
