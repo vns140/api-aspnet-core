@@ -10,7 +10,7 @@ namespace Contmatic.Integracao.Domain.Entidades
     {
         private Convite(ClienteSolicitante clienteSolicitante, ClienteConvidado clienteConvidado) : base()
         {
-            Chave.Gerar();
+            Chave = Chave.Factory();
             Status = EStatus.Pendente;
             DataCriacao = DateTime.Now;
             ClienteSolicitante = clienteSolicitante;
