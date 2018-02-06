@@ -1,5 +1,5 @@
 using Contmatic.Integracao.Domain.ObjetosValor.Shared;
-using Integracao.Domain.Shared.ObjetosValor.Validacoes;
+using Contmatic.Integracao.Domain.ObjetosValor.Validacoes;
 
 namespace Contmatic.Integracao.Domain.ObjetosValor
 {

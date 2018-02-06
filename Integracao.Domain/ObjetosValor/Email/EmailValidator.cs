@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using FluentValidation;
 using Contmatic.Integracao.Domain.ObjetosValor;
 
-namespace Integracao.Domain.Shared.ObjetosValor.Validacoes
+namespace Contmatic.Integracao.Domain.ObjetosValor.Validacoes
 {
     public class EmailValidator : AbstractValidator<Email>
     {
