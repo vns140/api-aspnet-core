@@ -11,6 +11,11 @@ namespace Contmatic.Integracao.Domain.Entidades.Shared
             Id = Guid.NewGuid();
         }
 
+        public Entidade(Guid id)
+        {
+            Id = id;
+        }
+        
         public Guid Id { get; }
     }
 }

@@ -25,9 +25,21 @@ namespace Contmatic.Integracao.Domain.Entidades
 
         public Chave Chave { get; }
         public ClienteSolicitante ClienteSolicitante { get; }
-        public EStatus Status { get; }
+        public EStatus Status { get; private set; }
         public DateTime DataCriacao { get; }
-        public DateTime? DataAceite { get; }
+        public DateTime? DataAceite { get; private set; }
         public ClienteConvidado ClienteConvidado { get; }
+
+        public void AceitarConvite()
+        {
+            Status = EStatus.Ativo;
+            DataAceite = DateTime.Now;
+        }
+
+        public void RecusarConvite()
+        {
+            Status = EStatus.Ativo;
+            DataAceite = DateTime.Now;
+        }
     }
 }

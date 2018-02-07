@@ -3,23 +3,17 @@ using Contmatic.Integracao.Domain.ObjetosValor;
 
 namespace Contmatic.Integracao.Domain.Entidades
 {
-    public abstract class Pessoa : Entidade
+    public abstract class Pessoa
     {
-        protected Pessoa(Codigo codigo, Apelido apelido, Email email):base()
+        protected Pessoa(Email email, Telefone Celular) : base()
         {
-            Codigo = Codigo;
-            Apelido = Apelido;
             Email = Email;
+            Celular.TipoCelular();         
         }
 
-        public static PessoaFisica Factory(Codigo codigo, Apelido apelido, Email email)
-        {      
-
-            return null;
-        }        
-
-        public Codigo Codigo { get; }
-        public Apelido Apelido { get; }
         public Email Email { get; }
+
+        public Telefone Celular { get; }
+
     }
 }

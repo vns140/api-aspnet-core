@@ -3,16 +3,16 @@ using Contmatic.Integracao.Domain.ObjetosValor;
 namespace Contmatic.Integracao.Domain.Entidades
 {
     public class ClienteConvidado : Cliente
-    {        
-       private ClienteConvidado(CNPJ cNPJ, string razaoSocial, Codigo codigo, Apelido apelido, Email email)
-        : base(cNPJ, razaoSocial, codigo, apelido, email)
+    {
+        private ClienteConvidado(Pessoa pessoa, Codigo codigo, Apelido apelido)
+          : base(codigo, apelido, pessoa)
         {
 
         }
 
-        public static ClienteConvidado Factory(CNPJ cNPJ, string razaoSocial, Codigo codigo, Apelido apelido, Email email)
+        public static ClienteConvidado Factory(Pessoa pessoa, Codigo codigo, Apelido apelido)
         {
-            ClienteConvidado clienteSolicitante = new ClienteConvidado(cNPJ, razaoSocial, codigo, apelido, email);
+            ClienteConvidado clienteSolicitante = new ClienteConvidado(pessoa, codigo, apelido);
             return clienteSolicitante;
         }
     }
