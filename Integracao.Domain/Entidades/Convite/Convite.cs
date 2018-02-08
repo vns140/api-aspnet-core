@@ -3,6 +3,7 @@ using System;
 using Contmatic.Integracao.Domain.ObjetosValor;
 using Contmatic.Integracao.Domain.Entidades.Shared;
 using static Contmatic.Integracao.Domain.Enums.EConviteType;
+using Contmatic.Integracao.Domain.ObjetosValor.Validacoes;
 
 namespace Contmatic.Integracao.Domain.Entidades
 {
@@ -20,6 +21,10 @@ namespace Contmatic.Integracao.Domain.Entidades
         public static Convite Factory(ClienteSolicitante clienteSolicitante, ClienteConvidado clienteConvidado)
         {
             Convite convite = new Convite(clienteSolicitante, clienteConvidado);
+
+            ConviteValidator conviteValidator = new ConviteValidator();
+            convite.IncluirValidacao(conviteValidator.Validate(convite)); 
+            
             return convite;
         }
 

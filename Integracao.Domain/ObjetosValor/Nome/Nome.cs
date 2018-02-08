@@ -1,4 +1,5 @@
 using Contmatic.Integracao.Domain.ObjetosValor.Shared;
+using Contmatic.Integracao.Domain.ObjetosValor.Validacoes;
 
 namespace Contmatic.Integracao.Domain.ObjetosValor
 {
@@ -13,6 +14,9 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
         public static Nome Factory(string primeiroNome, string sobreNome)
         {
             Nome nome = new Nome(primeiroNome,sobreNome);
+            NomeValidator nomeValidator = new NomeValidator();
+
+            nome.IncluirValidacao(nomeValidator.Validate(nome));
             return nome;
         }
 

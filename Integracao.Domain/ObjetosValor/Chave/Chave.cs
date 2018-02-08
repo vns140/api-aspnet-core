@@ -1,5 +1,6 @@
 using Contmatic.Integracao.Domain.ObjetosValor.Shared;
 using System;
+using Contmatic.Integracao.Domain.ObjetosValor.Validacoes;
 
 namespace Contmatic.Integracao.Domain.ObjetosValor
 {
@@ -19,6 +20,10 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
         {
             string identificacao = Guid.NewGuid().ToString().Replace("-", "").ToUpper();            
             Chave  chave = new Chave(identificacao);
+
+            ChaveValidator chaveValidator = new ChaveValidator();
+            chave.IncluirValidacao(chaveValidator.Validate(chave)); 
+
             return chave;
         }       
     }

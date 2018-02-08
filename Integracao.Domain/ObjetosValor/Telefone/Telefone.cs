@@ -1,4 +1,5 @@
 using Contmatic.Integracao.Domain.ObjetosValor.Shared;
+using Contmatic.Integracao.Domain.ObjetosValor.Validacoes;
 using Contmatic.Integracao.Domain.Shared.Enums;
 using static Contmatic.Integracao.Domain.Shared.Enums.ETelefone;
 
@@ -6,7 +7,7 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
 {
     public class Telefone : ObjetoValor
     {
-        private Telefone(string dDI, string dDD, string numero,TipoTelefone tipo)
+        private Telefone(int dDI, int dDD, int numero,TipoTelefone tipo)
         {
             DDI = dDI;
             DDD = dDD;
@@ -15,16 +16,19 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
             Tipo = tipo;
         }
 
-        public static Telefone Factory(string dDI, string dDD, string numero, TipoTelefone tipo)
+        public static Telefone Factory(int dDI, int dDD, int numero, TipoTelefone tipo)
         {
             Telefone telefone = new Telefone(dDI, dDD, numero,tipo);
+            TelefoneValidator telefoneValidator = new TelefoneValidator();
+
+            telefone.IncluirValidacao(telefoneValidator.Validate(telefone));
             return telefone;
         }
 
         public TipoTelefone Tipo { get; private set;}
-        public string DDI { get; }
-        public string DDD { get; }
-        public string Numero { get; }
+        public int DDI { get; }
+        public int DDD { get; }
+        public int Numero { get; }
         public bool NumeroConfirmado { get; private set;}
 
         public void ConfirmarNumero()

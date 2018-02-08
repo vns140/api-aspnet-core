@@ -14,7 +14,7 @@ namespace Integracao.Domain.Test
            //Dados Solicitante
            CPF cpfSolicitante = CPF.Factory("33587499837");
            Nome nomeSolicitante = Nome.Factory("Vinicius","Silva");
-           Telefone celularSolicitante = Telefone.Factory("55","11","969055218",TipoTelefone.Celular);
+           Telefone celularSolicitante = Telefone.Factory(55,11,969055218,TipoTelefone.Celular);
            Email emailSolicitante = Email.Factory("vns140@hotmail.com");
            Pessoa pessoaSolicitante = PessoaFisica.Factory(cpfSolicitante,nomeSolicitante,emailSolicitante,celularSolicitante);           
            Codigo codigoSolicitante = Codigo.Factory("17854");
@@ -24,7 +24,7 @@ namespace Integracao.Domain.Test
            //Dados Convidado
            CPF cpfConvidado = CPF.Factory("33587499837");
            Nome nomeConvidado = Nome.Factory("Vinicius","Silva");
-           Telefone celularConvidado = Telefone.Factory("55","11","969055218",TipoTelefone.Celular);
+           Telefone celularConvidado = Telefone.Factory(55,11,969055218,TipoTelefone.Celular);
            Email emailConvidado = Email.Factory("vns140@hotmail.com");
            Pessoa pessoaConvidado = PessoaFisica.Factory(cpfSolicitante,nomeSolicitante,emailSolicitante,celularSolicitante);           
            Codigo codigoConvidado = Codigo.Factory("17854");

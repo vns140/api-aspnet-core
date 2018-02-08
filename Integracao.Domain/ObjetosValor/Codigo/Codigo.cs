@@ -1,4 +1,5 @@
 using Contmatic.Integracao.Domain.ObjetosValor.Shared;
+using Contmatic.Integracao.Domain.ObjetosValor.Validacoes;
 
 namespace Contmatic.Integracao.Domain.ObjetosValor
 {
@@ -14,6 +15,9 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
         public static Codigo Factory(string identificacao)
         {
             Codigo codigo = new Codigo(identificacao);
+            CodigoValidator codigoValidator = new CodigoValidator();
+
+            codigo.IncluirValidacao(codigoValidator.Validate(codigo));
             return codigo;
         }
     }
