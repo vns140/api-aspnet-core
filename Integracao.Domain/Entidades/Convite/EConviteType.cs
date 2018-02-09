@@ -8,5 +8,11 @@
             Pendente = 2,
             Recusado = 3
         }
+
+        public enum ETipoCliente
+        {
+            Solicitante = 1,
+            Covidado =2
+        }       
     }
 }
