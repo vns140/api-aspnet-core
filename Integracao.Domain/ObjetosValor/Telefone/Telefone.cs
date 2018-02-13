@@ -26,9 +26,9 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
         }
 
         public TipoTelefone Tipo { get; private set;}
-        public int DDI { get; }
-        public int DDD { get; }
-        public int Numero { get; }
+        public int DDI { get; private set; }
+        public int DDD { get; private set; }
+        public int Numero { get; private set; }
         public bool NumeroConfirmado { get; private set;}
 
         public void ConfirmarNumero()

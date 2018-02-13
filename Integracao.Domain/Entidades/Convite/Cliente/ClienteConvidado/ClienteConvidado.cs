@@ -4,6 +4,11 @@ namespace Contmatic.Integracao.Domain.Entidades
 {
     public class ClienteConvidado : Cliente
     {
+
+        public ClienteConvidado()
+        {
+            
+        }
         private ClienteConvidado(Pessoa pessoa, Codigo codigo, Apelido apelido)
           : base(codigo, apelido, pessoa)
         {

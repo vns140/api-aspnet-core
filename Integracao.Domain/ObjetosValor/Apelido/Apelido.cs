@@ -10,7 +10,7 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
             Descricao = descricao;
         }
 
-        public string Descricao { get; }
+        public string Descricao { get; private set; }
 
         public static Apelido Factory(string descricao)
         {

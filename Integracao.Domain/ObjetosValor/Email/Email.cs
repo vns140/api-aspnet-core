@@ -5,7 +5,7 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
 {
     public class Email : ObjetoValor
     {
-        public string Endereco { get; }
+        public string Endereco { get; private set;}
 
         private Email(string endereco)
         {

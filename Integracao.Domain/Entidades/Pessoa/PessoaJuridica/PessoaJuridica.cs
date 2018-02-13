@@ -4,6 +4,10 @@ namespace Contmatic.Integracao.Domain.Entidades
 {
     public class PessoaJuridica :Pessoa
     {
+        public PessoaJuridica()
+        {
+            
+        }
         private PessoaJuridica(CNPJ cNPJ, string razaoSocial,Email email,Telefone celular):base(email,celular)
         {
             CNPJ = cNPJ;
@@ -16,7 +20,7 @@ namespace Contmatic.Integracao.Domain.Entidades
             return pessoaJuridica;
         }
 
-        public CNPJ CNPJ { get; }
-        public string RazaoSocial { get; }
+        public CNPJ CNPJ { get; private set; }
+        public string RazaoSocial { get; private set; }
     }
 }

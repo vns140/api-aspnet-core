@@ -20,7 +20,7 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
             return nome;
         }
 
-        public string PrimeiroNome { get;}
-        public string SobreNome { get;}
+        public string PrimeiroNome { get; private set; }
+        public string SobreNome { get; private set; }
     }
 }

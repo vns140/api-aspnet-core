@@ -9,6 +9,10 @@ namespace Contmatic.Integracao.Domain.Entidades
 {
     public class Convite : Entidade
     {
+        public Convite()
+        {
+            
+        }
         private Convite(ClienteSolicitante clienteSolicitante, ClienteConvidado clienteConvidado) : base()
         {
             Chave = Chave.Factory();
@@ -28,12 +32,12 @@ namespace Contmatic.Integracao.Domain.Entidades
             return convite;
         }
 
-        public Chave Chave { get; }
-        public ClienteSolicitante ClienteSolicitante { get; }
+        public Chave Chave { get; private set; }
+        public ClienteSolicitante ClienteSolicitante { get; private set; }
         public EStatus Status { get; private set; }
-        public DateTime DataCriacao { get; }
+        public DateTime DataCriacao { get; private set; }
         public DateTime? DataAceite { get; private set; }
-        public ClienteConvidado ClienteConvidado { get; }
+        public ClienteConvidado ClienteConvidado { get; private set; }
 
         public void AceitarConvite()
         {

@@ -11,6 +11,6 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
             Identificacao = identificacao;
         }
 
-        public string Identificacao { get;}
+        public string Identificacao { get; private set;}
     }
 }

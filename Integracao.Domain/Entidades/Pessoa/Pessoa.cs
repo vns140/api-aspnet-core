@@ -5,15 +5,20 @@ namespace Contmatic.Integracao.Domain.Entidades
 {
     public abstract class Pessoa
     {
-        protected Pessoa(Email email, Telefone Celular) : base()
+        public Pessoa()
         {
-            Email = Email;
+            
+        }
+        protected Pessoa(Email email, Telefone celular) : base()
+        {
+            Email = email;
+            Celular = celular;
             Celular.TipoCelular();         
         }
 
-        public Email Email { get; }
+        public Email Email { get; private set; }
 
-        public Telefone Celular { get; }
+        public Telefone Celular { get; private set; }
 
     }
 }

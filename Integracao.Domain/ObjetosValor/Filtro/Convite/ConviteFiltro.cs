@@ -9,9 +9,9 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
         {
         }
 
-        public EStatus Status { get; set; }
-        public string CNPJ { get;}
-        public string CPF { get; }
-        public ETipoCliente TipoCliente { get;}
+        public EStatus Status { get; private set; }
+        public string CNPJ { get; private set; }
+        public string CPF { get; private set; }
+        public ETipoCliente TipoCliente { get; private set; }
     }
 }
