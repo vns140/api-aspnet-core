@@ -33,7 +33,7 @@ namespace Contmatic.Integracao.Domain.Interfaces.Repositories
         /// </summary>
         /// <param name="filtro"></param>
         /// <returns></returns>
-        Task<IEnumerable<Convite>> ObterConvites(ConviteFiltro filtro);
+        Task<IEnumerable<Convite>> ObterConvitesAsync(ConviteFiltro filtro);
 
         /// <summary>
         /// Obtem Convite por Chave

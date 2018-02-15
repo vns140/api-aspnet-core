@@ -1,6 +1,8 @@
+using Integracao.Domain.Shared.Validacoes;
+
 namespace Contmatic.Integracao.Domain.ObjetosValor.Shared
 {
-    public abstract class Filtro
+    public abstract class Filtro : Validacao
     {
         public int Limit { get; }
 

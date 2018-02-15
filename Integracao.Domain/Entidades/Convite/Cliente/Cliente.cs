@@ -1,3 +1,4 @@
+using System;
 using Contmatic.Integracao.Domain.Entidades.Shared;
 using Contmatic.Integracao.Domain.ObjetosValor;
 
@@ -15,7 +16,6 @@ namespace Contmatic.Integracao.Domain.Entidades
             Apelido = apelido;
             Pessoa = pessoa;
         }
-
         public Pessoa Pessoa { get; private set; }
         public Codigo Codigo { get; private set; }
         public Apelido Apelido { get; private set; }

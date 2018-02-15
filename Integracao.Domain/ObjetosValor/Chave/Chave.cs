@@ -26,5 +26,15 @@ namespace Contmatic.Integracao.Domain.ObjetosValor
 
             return chave;
         }
+
+        public static Chave Factory(string identificacao)
+        {            
+            Chave chave = new Chave(identificacao);
+
+            ChaveValidator chaveValidator = new ChaveValidator();
+            chave.IncluirValidacao(chaveValidator.Validate(chave));
+
+            return chave;
+        }
     }
 }

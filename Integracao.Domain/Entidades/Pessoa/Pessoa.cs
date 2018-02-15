@@ -3,7 +3,7 @@ using Contmatic.Integracao.Domain.ObjetosValor;
 
 namespace Contmatic.Integracao.Domain.Entidades
 {
-    public abstract class Pessoa
+    public class Pessoa
     {
         public Pessoa()
         {
@@ -15,7 +15,7 @@ namespace Contmatic.Integracao.Domain.Entidades
             Celular = celular;
             Celular.TipoCelular();         
         }
-
+        
         public Email Email { get; private set; }
 
         public Telefone Celular { get; private set; }
