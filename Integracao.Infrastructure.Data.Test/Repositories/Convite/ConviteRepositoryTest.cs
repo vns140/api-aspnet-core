@@ -7,6 +7,7 @@ using Contmatic.Integracao.Domain.ObjetosValor;
 using Contmatic.Integracao.Infrastructure.Data;
 using Contmatic.Integracao.Infrastructure.Data.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static Contmatic.Integracao.Domain.Enums.EConviteType;
 using static Contmatic.Integracao.Domain.Shared.Enums.ETelefone;
 
 namespace Integracao.Infrastructure.Data.Test
@@ -21,13 +22,13 @@ namespace Integracao.Infrastructure.Data.Test
             ConviteRepository conviteRepo = new ConviteRepository();
 
             //Dados Solicitante
-            CPF cpfSolicitante = CPF.Factory("33587499837");
-            Nome nomeSolicitante = Nome.Factory("Vinicius", "Silva");
+            CPF cpfSolicitante = CPF.Factory("11111111111");
+            Nome nomeSolicitante = Nome.Factory("Homero", "Silva");
             Telefone celularSolicitante = Telefone.Factory(55, 11, 969055218, TipoTelefone.Celular);
-            Email emailSolicitante = Email.Factory("vns140@hotmail.com");
+            Email emailSolicitante = Email.Factory("advhomero@hotmail.com");
             Pessoa pessoaSolicitante = PessoaFisica.Factory(cpfSolicitante, nomeSolicitante, emailSolicitante, celularSolicitante);
-            Codigo codigoSolicitante = Codigo.Factory("17854");
-            Apelido apelidoSolicitante = Apelido.Factory("VINI");
+            Codigo codigoSolicitante = Codigo.Factory("1232");
+            Apelido apelidoSolicitante = Apelido.Factory("MERAO");
             ClienteSolicitante clienteSolicitante = ClienteSolicitante.Factory(pessoaSolicitante, codigoSolicitante, apelidoSolicitante);
 
             //Dados Convidado
@@ -41,15 +42,15 @@ namespace Integracao.Infrastructure.Data.Test
             ClienteConvidado clienteConvidado = ClienteConvidado.Factory(pessoaSolicitante, codigoSolicitante, apelidoSolicitante);
 
             Convite convite = Convite.Factory(clienteSolicitante, clienteConvidado);
-            await conviteRepo.EnviarConvite(convite);
+            await conviteRepo.EnviarConviteAsync(convite);
         }
 
         [TestMethod]
         public async Task DeveAceitarUmConvite()
         {
-            Chave chave = Chave.Factory("ACB50A784D9B4A688149CEBB72199DBE");
+            Chave chave = Chave.Factory("BC695B93A14648E59BB3F403BCA178C3");
             ConviteRepository conviteRepo = new ConviteRepository();
-            await conviteRepo.AceitarConvite(chave);
+            await conviteRepo.AceitarConviteAsync(chave);
         }
 
         [TestMethod]
@@ -57,7 +58,7 @@ namespace Integracao.Infrastructure.Data.Test
         {
             Chave chave = Chave.Factory("ACB50A784D9B4A688149CEBB72199DBE");
             ConviteRepository conviteRepo = new ConviteRepository();
-            await conviteRepo.RecusarConvite(chave);
+            await conviteRepo.RecusarConviteAsync(chave);
         }
 
         [TestMethod]
@@ -65,17 +66,28 @@ namespace Integracao.Infrastructure.Data.Test
         {
             Chave chave = Chave.Factory("BC695B93A14648E59BB3F403BCA178C3");
             ConviteRepository conviteRepo = new ConviteRepository();
-            var convite = await conviteRepo.ObterPorChave(chave);
+            var convite = await conviteRepo.ObterPorChaveAsync(chave);
         }
 
         [TestMethod]
-        public async Task DeveBuscarPeloFiltro()
+        public async Task DeveBuscarPeloFiltroStatus()
         {
-            //ConviteFiltro filtro = new ConviteFiltro();
-            
-            Chave chave = Chave.Factory("BC695B93A14648E59BB3F403BCA178C3");
+            ConviteFiltro filtro = ConviteFiltro.Factory(null, null,
+            EStatus.Pendente, 10, 0);
+
             ConviteRepository conviteRepo = new ConviteRepository();
-            var convite = await conviteRepo.ObterPorChave(chave);
+            var convite = await conviteRepo.ObterAsync(filtro);
+        }
+
+        [TestMethod]
+        public async Task DeveBuscarPeloFiltroClienteConvidado()
+        {
+            PessoaFisica clienteConvidado = PessoaFisica.Factory(CPF.Factory(""), Nome.Factory("Vi", ""), Email.Factory(""), Telefone.Factory(0,0,0,TipoTelefone.Celular));
+            ConviteFiltro filtro = ConviteFiltro.Factory(clienteConvidado, null, null, 10, 0);
+
+
+            ConviteRepository conviteRepo = new ConviteRepository();
+            var convite = await conviteRepo.ObterAsync(filtro);
         }
     }
 }

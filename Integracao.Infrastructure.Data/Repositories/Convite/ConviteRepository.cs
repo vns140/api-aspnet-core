@@ -20,7 +20,7 @@ namespace Contmatic.Integracao.Infrastructure.Data.Repositories
             _ctx = new Contexto();
         }
 
-        public async Task EnviarConvite(Convite convite)
+        public async Task EnviarConviteAsync(Convite convite)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace Contmatic.Integracao.Infrastructure.Data.Repositories
             catch (Exception ex) { throw ex; }
         }
 
-        public async Task AceitarConvite(Chave chave)
+        public async Task AceitarConviteAsync(Chave chave)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Contmatic.Integracao.Infrastructure.Data.Repositories
             catch (Exception ex) { throw ex; }
         }
 
-        public async Task RecusarConvite(Chave chave)
+        public async Task RecusarConviteAsync(Chave chave)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Contmatic.Integracao.Infrastructure.Data.Repositories
             catch (Exception ex) { throw ex; }
         }
 
-        public async Task<IEnumerable<Convite>> ObterConvitesAsync(ConviteFiltro filtro)
+        public async Task<IEnumerable<Convite>> ObterAsync(ConviteFiltro filtro)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace Contmatic.Integracao.Infrastructure.Data.Repositories
                 else if (filtro.ClienteSolicitante != null && filtro.ClienteSolicitante is PessoaJuridica)
                     query = FiltroClienteSolicitantePessoaJuridica(filtro, query);
 
-                return await query.ToListAsync();               
+                return await query.Skip(filtro.Offset).Take(filtro.Limit).ToListAsync();
             }
             catch (Exception ex) { throw ex; }
         }
@@ -80,27 +80,26 @@ namespace Contmatic.Integracao.Infrastructure.Data.Repositories
         #region auxiliares no filtro
         private static IMongoQueryable<Convite> FiltroClienteConvidadoPessoaFisica(ConviteFiltro filtro, IMongoQueryable<Convite> query)
         {
-            if (filtro.ClienteConvidado != null && filtro.ClienteConvidado is PessoaFisica)
+
+            string cpf = (filtro.ClienteConvidado as PessoaFisica).CPF.Identificacao;
+            string primeiroNome = (filtro.ClienteConvidado as PessoaFisica).Nome.PrimeiroNome;
+            string sobreNome = (filtro.ClienteConvidado as PessoaFisica).Nome.SobreNome;
+
+            if (!String.IsNullOrEmpty(cpf))
             {
-                string cpf = (filtro.ClienteConvidado as PessoaFisica).CPF.Identificacao;
-                string primeiroNome = (filtro.ClienteConvidado as PessoaFisica).Nome.PrimeiroNome;
-                string sobreNome = (filtro.ClienteConvidado as PessoaFisica).Nome.SobreNome;
-
-                if (!String.IsNullOrEmpty(cpf))
-                {
-                    query = query.Where(x => ((x.ClienteConvidado as Cliente).Pessoa as PessoaFisica).CPF.Identificacao == (filtro.ClienteConvidado as PessoaFisica).CPF.Identificacao);
-                }
-
-                if (!String.IsNullOrEmpty(primeiroNome))
-                {
-                    query = query.Where(x => ((x.ClienteConvidado as Cliente).Pessoa as PessoaFisica).Nome.PrimeiroNome == (filtro.ClienteConvidado as PessoaFisica).Nome.PrimeiroNome);
-                }
-
-                if (!String.IsNullOrEmpty(sobreNome))
-                {
-                    query = query.Where(x => ((x.ClienteConvidado as Cliente).Pessoa as PessoaFisica).Nome.PrimeiroNome == (filtro.ClienteConvidado as PessoaFisica).Nome.PrimeiroNome);
-                }
+                query = query.Where(x => ((x.ClienteConvidado as Cliente).Pessoa as PessoaFisica).CPF.Identificacao == (filtro.ClienteConvidado as PessoaFisica).CPF.Identificacao);
             }
+
+            if (!String.IsNullOrEmpty(primeiroNome))
+            {
+                query = query.Where(x => ((x.ClienteConvidado as Cliente).Pessoa as PessoaFisica).Nome.PrimeiroNome.ToUpper().Contains((filtro.ClienteConvidado as PessoaFisica).Nome.PrimeiroNome.ToUpper()));
+            }
+
+            if (!String.IsNullOrEmpty(sobreNome))
+            {
+                query = query.Where(x => ((x.ClienteConvidado as Cliente).Pessoa as PessoaFisica).Nome.PrimeiroNome.ToUpper().Contains((filtro.ClienteConvidado as PessoaFisica).Nome.PrimeiroNome.ToUpper()));
+            }
+
 
             return query;
         }
@@ -118,7 +117,7 @@ namespace Contmatic.Integracao.Infrastructure.Data.Repositories
 
             if (!String.IsNullOrEmpty(razaoSocial))
             {
-                query = query.Where(x => ((x.ClienteConvidado as Cliente).Pessoa as PessoaJuridica).RazaoSocial == (filtro.ClienteConvidado as PessoaJuridica).RazaoSocial);
+                query = query.Where(x => ((x.ClienteConvidado as Cliente).Pessoa as PessoaJuridica).RazaoSocial.ToUpper().Contains((filtro.ClienteConvidado as PessoaJuridica).RazaoSocial.ToUpper()));
             }
 
 
@@ -140,12 +139,12 @@ namespace Contmatic.Integracao.Infrastructure.Data.Repositories
 
                 if (!String.IsNullOrEmpty(primeiroNome))
                 {
-                    query = query.Where(x => ((x.ClienteSolicitante as Cliente).Pessoa as PessoaFisica).Nome.PrimeiroNome == (filtro.ClienteSolicitante as PessoaFisica).Nome.PrimeiroNome);
+                    query = query.Where(x => ((x.ClienteSolicitante as Cliente).Pessoa as PessoaFisica).Nome.PrimeiroNome.ToUpper().Contains((filtro.ClienteSolicitante as PessoaFisica).Nome.PrimeiroNome.ToUpper()));
                 }
 
                 if (!String.IsNullOrEmpty(sobreNome))
                 {
-                    query = query.Where(x => ((x.ClienteSolicitante as Cliente).Pessoa as PessoaFisica).Nome.PrimeiroNome == (filtro.ClienteSolicitante as PessoaFisica).Nome.PrimeiroNome);
+                    query = query.Where(x => ((x.ClienteSolicitante as Cliente).Pessoa as PessoaFisica).Nome.PrimeiroNome.ToUpper().Contains((filtro.ClienteSolicitante as PessoaFisica).Nome.PrimeiroNome.ToUpper()));
                 }
             }
 
@@ -165,15 +164,14 @@ namespace Contmatic.Integracao.Infrastructure.Data.Repositories
 
             if (!String.IsNullOrEmpty(razaoSocial))
             {
-                query = query.Where(x => ((x.ClienteSolicitante as Cliente).Pessoa as PessoaJuridica).RazaoSocial == (filtro.ClienteSolicitante as PessoaJuridica).RazaoSocial);
+                query = query.Where(x => ((x.ClienteSolicitante as Cliente).Pessoa as PessoaJuridica).RazaoSocial.ToUpper().Contains((filtro.ClienteSolicitante as PessoaJuridica).RazaoSocial.ToUpper()));
             }
-
 
             return query;
         }
         #endregion
-        
-        public async Task<Convite> ObterPorChave(Chave chave)
+
+        public async Task<Convite> ObterPorChaveAsync(Chave chave)
         {
             try
             {

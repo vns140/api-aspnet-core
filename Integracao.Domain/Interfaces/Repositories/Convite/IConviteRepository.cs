@@ -14,35 +14,32 @@ namespace Contmatic.Integracao.Domain.Interfaces.Repositories
         /// visualizado pelo cliente convidado, usuário dentro dos sistemas vizinhos.
         /// </summary>
         /// <param name="convite">representa um convite</param>
-        Task EnviarConvite(Convite convite);
+        Task EnviarConviteAsync(Convite convite);
 
         /// <summary>
         ///  Permite ao cliente covidado, dar o aceite ao convite.
         /// </summary>
         /// <param name="chave">chave que representa o convite entre convidado X solicitante</param>
-        Task AceitarConvite(Chave chave);
+        Task AceitarConviteAsync(Chave chave);
 
         /// <summary>
         /// Permite ao cliente recusar o convite de integração de sistemas.
         /// </summary>
         /// <param name="chave">chave que representa o convite entre convidado X solicitante</param>
-        Task RecusarConvite(Chave chave);
+        Task RecusarConviteAsync(Chave chave);
 
         /// <summary>
         /// Obtem os convites conforme filtro
         /// </summary>
         /// <param name="filtro"></param>
         /// <returns></returns>
-        Task<IEnumerable<Convite>> ObterConvitesAsync(ConviteFiltro filtro);
+        Task<IEnumerable<Convite>> ObterAsync(ConviteFiltro filtro);
 
         /// <summary>
         /// Obtem Convite por Chave
         /// </summary>
         /// <param name="filtro"></param>
         /// <returns></returns>
-        Task<Convite> ObterPorChave(Chave chave);
-
-
-
+        Task<Convite> ObterPorChaveAsync(Chave chave);
     }
 }
