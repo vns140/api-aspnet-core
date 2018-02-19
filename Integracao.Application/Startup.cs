@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Contmatic.Integracao.Domain.Interfaces.Repositories;
 using Contmatic.Integracao.Infrastructure.CrossCutting;
 using Contmatic.Integracao.Infrastructure.Data.Repositories;
@@ -29,6 +30,7 @@ namespace Integracao.Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddAutoMapper();
             
             services.AddTransient<IEmailService, EmailService>();
             services.AddScoped<IConviteRepository, ConviteRepository>();
