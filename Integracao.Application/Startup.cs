@@ -34,7 +34,8 @@ namespace Integracao.Application
             
             services.AddTransient<IEmailService, EmailService>();
             services.AddScoped<IConviteRepository, ConviteRepository>();
-
+            
+           
             // Configurando o serviço de documentação do Swagger
             services.AddSwaggerGen(c =>
             {
@@ -56,9 +57,9 @@ namespace Integracao.Application
                 string nomeAplicacao =
                     PlatformServices.Default.Application.ApplicationName;
                 
-                //string caminhoXmlDoc = System.IO.Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
+                string caminhoXmlDoc = System.IO.Path.Combine(caminhoAplicacao, "api-convite.xml");
 
-                //c.IncludeXmlComments(caminhoXmlDoc);
+                c.IncludeXmlComments(caminhoXmlDoc);
             });
         }
 
